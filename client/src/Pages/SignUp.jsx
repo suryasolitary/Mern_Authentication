@@ -1,13 +1,18 @@
 //import { json, response, response } from 'express'
 import  { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+//import { SignInStart,SignInSuccess,SignInFaliure } from '../redux/user/userSlice.js'
+//import {useDispatch,useSelector} from 'react-redux'
 
 export default function SignUp(){
   const [formData, setformData]=useState({})
+  const [Loading, setLoading] = useState(false)
   const [Error,setError] = useState(false)
-  const [Loading,setLoading]=useState(false)
+  //const { Loading, Error} = useSelector((state)=> state.user )
+  const navigation = useNavigate()
+  //const dispatch = useDispatch();
   const handleInput = (e)=>{
-      setformData({...formData,[e.target.id] :e.target.value})
+   setformData({...formData,[e.target.id]:e.target.value})
       //console.log(formData);
   }
   const handlesubmit = async(e)=>{
@@ -21,11 +26,13 @@ export default function SignUp(){
         body: JSON.stringify(formData)
       })
       const data = await response.json()
-      console.log(data);
+      //console.log(data);
       setLoading(false)
       if(data.success === false){
-          setError(true);
+          setError(true)
+          return
       }
+      navigation("/sign-in")
   }catch(err){
       setLoading(false)
       setError(true)
