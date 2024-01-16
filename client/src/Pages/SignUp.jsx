@@ -1,6 +1,7 @@
 //import { json, response, response } from 'express'
 import  { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Auth from '../components/Auth'
 //import { SignInStart,SignInSuccess,SignInFaliure } from '../redux/user/userSlice.js'
 //import {useDispatch,useSelector} from 'react-redux'
 
@@ -46,7 +47,9 @@ export default function SignUp(){
         <input type="email" placeholder='Email' id="email"  onChange={handleInput} className="bg-slate-100 p-3 pl-4 rounded-lg outline-none" />
         <input type="password" placeholder='Password' id="password"  onChange={handleInput} className="bg-slate-100 p-3 rounded-lg outline-none pl-4" />
         <button type="submit" disabled={Loading} className="bg-slate-800 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80  ">{Loading?" Loading..." : "Sign Up"}</button>
+        <Auth />
       </form>
+     
       <div className="flex gap-3 my-4">
           <p className="font-semibold">Have a Account ?</p>
           <Link to="/sign-in">
