@@ -3,7 +3,8 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import userRoutes from "./Routers/userRoutes.js"
 import authRoutes from "./Routers/user.Signup.js"
-import cookieParser from 'cookie-parser'
+import cookieParser from 'cookie-parser';
+import path from 'path'
 //import UserSchema from './models/UserSchema'
 dotenv.config()
 
@@ -12,8 +13,13 @@ mongoose.connect(process.env.MONGO).then(()=>{
 }).catch((err)=>{
     console.log(err)
 })
+const __dirname = path.resolve()
 const app = express()
 const port = 5000
+app.use(express.static(path.join(__dirname,'/client/dist')))
+app.get('*' ,(req,res)=>{
+    res.sendFile(path.join(__dirname,'client','dist','index.html'))
+});
 app.use(express.json());
 app.use(cookieParser());
 app.listen(port,()=>{
