@@ -11,7 +11,7 @@ const handleGoolgeButton = async() =>{
         const Provider = new GoogleAuthProvider();
         const auth = getAuth(app)
         const result = await signInWithPopup(auth,Provider)
-        console.log(result)
+        //console.log(result)
         const response = await fetch("/api/auth/google",{
             method:"POST",
             headers:{"Content-Type":"application/json"},
@@ -24,7 +24,7 @@ const handleGoolgeButton = async() =>{
         })
         
         const data = await response.json()
-        console.log(data)
+        //console.log(data)
         dispatch(SignInSuccess(data))
       }catch(err){
        console.log("Could not login with Google : ",err)
